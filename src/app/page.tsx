@@ -31,8 +31,8 @@ export default function Home() {
         </div>
         
         <h1 className="text-[42px] md:text-[60px] font-[650] tracking-[-0.035em] mb-6 max-w-[800px] text-balance leading-[1.1]">
-          Every tool you need.<br/>
-          <span className="text-[var(--foreground-muted)]">No nonsense.</span>
+          Every tool.<br/>
+          <span className="text-[var(--foreground-muted)]">One place.</span>
         </h1>
         
         <p className="text-lg text-[var(--foreground-secondary)] max-w-[600px] text-balance mb-6 leading-relaxed">

@@ -15,7 +15,7 @@ export default function PdfToJpg() {
   useEffect(() => {
     // Dynamic import for pdfjs-dist to avoid SSR issues
     import("pdfjs-dist").then((pdfjs) => {
-      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
       setPdfjsLib(pdfjs);
     }).catch(err => console.error("Failed to load PDF.js", err));
   }, []);
