@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "extracted",
+    "omnidownloader",
+    "ff-bot-pterodactyl",
+    "movie bot*",
+    "redeem bot",
+    "social",
+    "stream",
+    "val",
+    "new animate",
+    "learn",
+    "ffsensi-better",
+    "fake-like-api",
+    "api-tester",
+    "aurax-bot",
+    "loyalty-bot",
+    "platinum-detailing",
+    "smm-panel-free",
+    "smm-panel-modern",
+    "ae-3d-edit",
+    "INFO-WEB",
+    "summer project"
+  ]
+}
