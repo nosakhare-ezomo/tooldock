@@ -4,7 +4,7 @@ import React, { useState, useRef, ChangeEvent } from "react";
 import { PDFDocument } from "pdf-lib";
 import { ToolLayout } from "@/components/ToolLayout";
 
-export default function JpgToPdf() {
+export default function ImgToPdf() {
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
@@ -31,32 +31,51 @@ export default function JpgToPdf() {
       const pdf = await PDFDocument.create();
 
       for (const file of files) {
-        const arrayBuffer = await file.arrayBuffer();
-        let image;
+        // Use browser's native Image decoding and Canvas to standardize all images to JPG
+        // This makes it work flawlessly for PNGs, WebP, GIF, etc. without pdf-lib crashing
+        const img = new Image();
+        const url = URL.createObjectURL(file);
         
-        if (file.type === "image/jpeg" || file.type === "image/jpg") {
-          image = await pdf.embedJpg(arrayBuffer);
-        } else if (file.type === "image/png") {
-          image = await pdf.embedPng(arrayBuffer);
-        } else {
-          // Skip unsupported types for now
-          continue;
-        }
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
 
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        
+        if (!ctx) continue;
+        
+        // Fill white background in case of transparent PNG/WebP
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        // Export as standard JPG base64 for pdf-lib
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+        const base64Data = dataUrl.split(",")[1];
+        
+        const image = await pdf.embedJpg(base64Data);
         const page = pdf.addPage([image.width, image.height]);
+        
         page.drawImage(image, {
           x: 0,
           y: 0,
           width: image.width,
           height: image.height,
         });
+        
+        URL.revokeObjectURL(url);
       }
 
       const pdfBytes = await pdf.save();
       const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
-      const url = URL.createObjectURL(blob);
+      const outUrl = URL.createObjectURL(blob);
       
-      setResultUrl(url);
+      setResultUrl(outUrl);
     } catch (err) {
       console.error(err);
       alert("An error occurred during conversion.");
@@ -73,23 +92,23 @@ export default function JpgToPdf() {
 
   return (
     <ToolLayout
-      title="JPG to PDF"
-      description="Convert images to a single PDF document locally in your browser."
+      title="IMG to PDF"
+      description="Convert any images (JPG, PNG, WebP) to a single PDF document locally in your browser."
       category="PDF Tools"
       categoryHref="/pdf"
-      icon="📑"
+      icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>}
     >
       <div className="flex flex-col gap-8">
         {!resultUrl ? (
           <>
             <div 
-              className="w-full min-h-[150px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-6 bg-primary-500/5 hover:bg-primary-500/10 transition-colors cursor-pointer"
+              className="w-full min-h-[150px] border-2 border-dashed border-[var(--primary-500)]/30 rounded-2xl flex flex-col items-center justify-center p-6 bg-[var(--primary-500)]/5 hover:bg-[var(--primary-500)]/10 transition-colors cursor-pointer"
               onClick={() => fileInputRef.current?.click()}
             >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-500 mb-3"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--primary-500)] mb-3"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
               <p className="text-base font-bold mb-1">Add Images</p>
-              <p className="text-xs opacity-60">JPG and PNG supported</p>
-              <input ref={fileInputRef} type="file" accept="image/jpeg,image/png" multiple onChange={handleFileChange} className="hidden" />
+              <p className="text-xs opacity-60">JPG, PNG, WebP supported</p>
+              <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFileChange} className="hidden" />
             </div>
 
             {files.length > 0 && (

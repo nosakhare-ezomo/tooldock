@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/pdf/split',
     '/pdf/compress',
     '/pdf-to-jpg',
-    '/jpg-to-pdf',
+    '/img-to-pdf',
     '/image/compress',
     '/image/resize',
     '/image/convert',
