@@ -6,7 +6,7 @@ const pdfTools = [
   { name: "Split PDF", desc: "Extract pages from a PDF", icon: "📄-", href: "/pdf/split" },
   { name: "Compress PDF", desc: "Reduce PDF file size", icon: "🗜️", href: "/pdf/compress" },
   { name: "PDF to JPG", desc: "Convert PDF pages to images", icon: "🖼️", href: "/pdf-to-jpg" },
-  { name: "JPG to PDF", desc: "Combine images to PDF", icon: "📑", href: "/jpg-to-pdf" },
+  { name: "IMG to PDF", desc: "Combine images to PDF", icon: "📑", href: "/img-to-pdf" },
 ];
 
 export default function PdfCategory() {
