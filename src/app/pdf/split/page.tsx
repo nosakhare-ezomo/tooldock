@@ -127,10 +127,10 @@ export default function SplitPDF() {
         ) : (
           <>
             <div className="flex justify-between items-center bg-black/5 dark:bg-white/5 p-4 rounded-xl">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded bg-red-50 dark:bg-red-900/20 text-red-500 flex items-center justify-center font-bold text-sm">PDF</div>
-                <div>
-                  <p className="font-semibold">{file.name}</p>
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="w-10 h-10 rounded bg-red-50 dark:bg-red-900/20 text-red-500 flex items-center justify-center font-bold text-sm shrink-0">PDF</div>
+                <div className="min-w-0">
+                  <p className="font-semibold truncate">{file.name}</p>
                   <p className="text-xs opacity-60">{totalPages > 0 ? `${totalPages} Pages` : "Loading pages..."}</p>
                 </div>
               </div>

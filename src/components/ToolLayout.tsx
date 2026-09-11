@@ -43,15 +43,17 @@ export function ToolLayout({
 
       {/* Main Tool Interface */}
       <main className="w-full max-w-[800px]">
-        <div className="liquid-glass-panel p-5 md:p-8 w-full relative">
+        <div className="liquid-glass-panel p-5 md:p-8 w-full relative flex flex-col">
           {isLocalProcessing && (
-            <div className="absolute top-4 right-4 flex items-center gap-2 text-[11px] font-medium text-[var(--foreground-muted)] bg-[rgba(255,255,255,0.05)] px-2.5 py-1.5 rounded-full border border-[var(--glass-border)]">
+            <div className="self-end mb-6 flex items-center gap-2 text-[11px] font-medium text-[var(--foreground-muted)] bg-[rgba(255,255,255,0.05)] px-2.5 py-1.5 rounded-full border border-[var(--glass-border)]">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               Processed on your device
               <div className="w-1.5 h-1.5 rounded-full bg-[#30D158] ml-0.5"></div>
             </div>
           )}
-          {children}
+          <div className="w-full">
+            {children}
+          </div>
         </div>
       </main>
 

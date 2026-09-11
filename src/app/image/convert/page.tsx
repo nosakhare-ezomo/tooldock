@@ -76,10 +76,10 @@ export default function ImageConverter() {
       ) : (
         <div className="flex flex-col gap-8">
           <div className="flex justify-between items-center bg-black/5 dark:bg-white/5 p-4 rounded-xl">
-            <div className="flex items-center gap-4">
-              {preview && <img src={preview} alt="Preview" className="w-16 h-16 object-cover rounded-lg shadow-sm" />}
-              <div>
-                <p className="font-semibold">{file.name}</p>
+            <div className="flex items-center gap-4 min-w-0">
+              {preview && <img src={preview} alt="Preview" className="w-16 h-16 object-cover rounded-lg shadow-sm shrink-0" />}
+              <div className="min-w-0">
+                <p className="font-semibold truncate">{file.name}</p>
                 <p className="text-xs opacity-60 uppercase">Format: {getExt(file.type)}</p>
               </div>
             </div>
