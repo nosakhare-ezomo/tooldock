@@ -11,6 +11,7 @@ export default function QRCodeGenerator() {
   const [password, setPassword] = useState("");
   const [encryption, setEncryption] = useState("WPA");
   const [fgColor, setFgColor] = useState("#000000");
+  const [showPassword, setShowPassword] = useState(false);
   const [bgColor, setBgColor] = useState("#ffffff");
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -115,13 +116,23 @@ export default function QRCodeGenerator() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Password</label>
-                  <input 
-                    type="text" 
-                    value={password} 
-                    onChange={e => setPassword(e.target.value)} 
-                    placeholder="SecretPassword"
-                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-black/50 border border-black/10 dark:border-white/10 focus:ring-2 focus:ring-primary-500/50 outline-none"
-                  />
+                  <div className="relative">
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      value={password} 
+                      onChange={e => setPassword(e.target.value)} 
+                      placeholder="SecretPassword"
+                      className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-black/50 border border-black/10 dark:border-white/10 focus:ring-2 focus:ring-primary-500/50 outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Security</label>

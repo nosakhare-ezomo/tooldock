@@ -64,15 +64,12 @@ export default function ImageConverter() {
       icon="🔄"
     >
       {!file ? (
-        <div 
-          className="w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 bg-primary-500/5 hover:bg-primary-500/10 transition-colors cursor-pointer"
-          onClick={() => fileInputRef.current?.click()}
-        >
+        <button type="button" className="w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 bg-primary-500/5 hover:bg-primary-500/10 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:outline-none cursor-pointer" onClick={() => fileInputRef.current?.click()} aria-label="Upload file">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-500 mb-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           <p className="text-lg font-bold mb-2">Select an image</p>
           <p className="text-sm opacity-60">PNG, JPG, WebP supported</p>
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-        </div>
+          <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/heic" onChange={handleFileChange} className="hidden" tabIndex={-1} aria-hidden="true" />
+            </button>
       ) : (
         <div className="flex flex-col gap-8">
           <div className="flex justify-between items-center bg-black/5 dark:bg-white/5 p-4 rounded-xl">

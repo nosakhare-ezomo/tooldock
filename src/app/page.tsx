@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { SearchableToolGrid } from "@/components/SearchableToolGrid";
 
@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center pb-24">
       {/* Hero Section */}
-      <section className="w-full text-center py-24 flex flex-col items-center">
+      <section className="w-full text-center pt-16 pb-20 flex flex-col items-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[8px] bg-[var(--card-bg)] border border-[var(--card-border)] text-xs font-semibold tracking-wider mb-8 uppercase text-[var(--foreground-muted)]">
           <span>Fast</span>
           <span className="w-1 h-1 rounded-full bg-current opacity-30"></span>
@@ -40,7 +40,9 @@ export default function Home() {
         </p>
       </section>
 
-      <SearchableToolGrid tools={popularTools} />
+      <Suspense fallback={<div className="w-full max-w-[600px] h-14 bg-black/5 dark:bg-white/5 rounded-[18px] animate-pulse mb-12 mt-4" />}>
+        <SearchableToolGrid tools={popularTools} />
+      </Suspense>
 
       {/* Local Processing Promise */}
       <section className="w-full mt-32 text-center flex flex-col items-center">

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 interface Tool {
   name: string;
@@ -17,7 +18,16 @@ interface SearchableToolGridProps {
 
 export function SearchableToolGrid({ tools }: SearchableToolGridProps) {
   const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
   
+  useEffect(() => {
+    if (searchParams.get("search") === "focus") {
+      inputRef.current?.focus();
+      inputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [searchParams]);
+
   const filteredTools = tools.filter(tool => 
     tool.name.toLowerCase().includes(query.toLowerCase()) || 
     tool.desc.toLowerCase().includes(query.toLowerCase())
@@ -36,10 +46,13 @@ export function SearchableToolGrid({ tools }: SearchableToolGridProps) {
       {/* Search Field */}
       <div className="w-full max-w-[600px] relative group mb-12 mt-4">
         <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-[var(--foreground-muted)] group-focus-within:text-primary-500 transition-colors">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
         <input 
+          id="global-search"
+          ref={inputRef}
           type="text" 
+          aria-label="Search tools"
           placeholder="Search tools..." 
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -48,9 +61,10 @@ export function SearchableToolGrid({ tools }: SearchableToolGridProps) {
         {query && (
           <button 
             onClick={() => setQuery("")}
-            className="absolute inset-y-0 right-4 flex items-center text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+            aria-label="Clear search"
+            className="absolute inset-y-0 right-4 flex items-center text-[var(--foreground-muted)] hover:text-[var(--foreground)] min-w-[44px] justify-center"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         )}
       </div>

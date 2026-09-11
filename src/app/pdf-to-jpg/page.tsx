@@ -96,14 +96,11 @@ export default function PdfToJpg() {
     >
       <div className="flex flex-col gap-8">
         {!file ? (
-          <div 
-            className={`w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 transition-colors cursor-pointer ${!pdfjsLib ? "opacity-50 cursor-not-allowed bg-gray-100" : "bg-primary-500/5 hover:bg-primary-500/10"}`}
-            onClick={() => pdfjsLib && fileInputRef.current?.click()}
-          >
+          <button type="button" className={`w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 transition-colors cursor-pointer ${!pdfjsLib ? "opacity-50 cursor-not-allowed bg-gray-100" : "bg-primary-500/5 hover:bg-primary-500/10"} focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:outline-none`} onClick={() => pdfjsLib && fileInputRef.current?.click()} aria-label="Upload PDF">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-500 mb-4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
             <p className="text-lg font-bold mb-2">{!pdfjsLib ? "Loading engine..." : "Select a PDF"}</p>
-            <input ref={fileInputRef} type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" disabled={!pdfjsLib} />
-          </div>
+            <input ref={fileInputRef} type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" disabled={!pdfjsLib} tabIndex={-1} aria-hidden="true" />
+          </button>
         ) : (
           <>
             <div className="flex justify-between items-center bg-black/5 dark:bg-white/5 p-4 rounded-xl">

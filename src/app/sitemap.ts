@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tooldock.com' // Placeholder for real domain
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tooldock-ff.onrender.com'
 
   // All routes that should be indexed
   const routes = [
@@ -20,7 +20,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/qr-code-generator',
     '/password-generator',
     '/word-counter',
-    '/percentage-calculator'
+    '/percentage-calculator',
+    '/about',
+    '/contact',
+    '/utilities',
+    '/calculators',
+    '/text',
+    '/image',
+    '/pdf'
   ]
 
   return routes.map((route) => ({

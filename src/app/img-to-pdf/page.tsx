@@ -101,15 +101,12 @@ export default function ImgToPdf() {
       <div className="flex flex-col gap-8">
         {!resultUrl ? (
           <>
-            <div 
-              className="w-full min-h-[150px] border-2 border-dashed border-[var(--primary-500)]/30 rounded-2xl flex flex-col items-center justify-center p-6 bg-[var(--primary-500)]/5 hover:bg-[var(--primary-500)]/10 transition-colors cursor-pointer"
-              onClick={() => fileInputRef.current?.click()}
-            >
+            <button type="button" className="w-full min-h-[150px] border-2 border-dashed border-[var(--primary-500)]/30 rounded-2xl flex flex-col items-center justify-center p-6 bg-[var(--primary-500)]/5 hover:bg-[var(--primary-500)]/10 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:outline-none" onClick={() => fileInputRef.current?.click()} aria-label="Upload files">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--primary-500)] mb-3"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
               <p className="text-base font-bold mb-1">Add Images</p>
               <p className="text-xs opacity-60">JPG, PNG, WebP supported</p>
-              <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFileChange} className="hidden" />
-            </div>
+              <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/heic" multiple onChange={handleFileChange} className="hidden" tabIndex={-1} aria-hidden="true" />
+            </button>
 
             {files.length > 0 && (
               <div className="flex flex-col gap-3">

@@ -116,14 +116,11 @@ export default function SplitPDF() {
     >
       <div className="flex flex-col gap-8">
         {!file ? (
-          <div 
-            className="w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 bg-primary-500/5 hover:bg-primary-500/10 transition-colors cursor-pointer"
-            onClick={() => fileInputRef.current?.click()}
-          >
+          <button type="button" className="w-full min-h-[300px] border-2 border-dashed border-primary-500/30 rounded-2xl flex flex-col items-center justify-center p-8 bg-primary-500/5 hover:bg-primary-500/10 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:outline-none cursor-pointer" onClick={() => fileInputRef.current?.click()} aria-label="Upload file">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-500 mb-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line></svg>
             <p className="text-lg font-bold mb-2">Select a PDF</p>
-            <input ref={fileInputRef} type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" />
-          </div>
+            <input ref={fileInputRef} type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" tabIndex={-1} aria-hidden="true" />
+            </button>
         ) : (
           <>
             <div className="flex justify-between items-center bg-black/5 dark:bg-white/5 p-4 rounded-xl">
