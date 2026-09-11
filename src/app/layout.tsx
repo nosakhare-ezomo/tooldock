@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 function Navigation() {
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 p-4 pt-4 md:pt-5 flex justify-center pointer-events-none">
+    <div className="absolute top-0 left-0 right-0 z-50 p-4 pt-4 md:pt-5 flex justify-center pointer-events-none">
       <nav className="pointer-events-auto liquid-glass rounded-[20px] px-5 py-0 h-[64px] flex items-center justify-between gap-8 w-full max-w-[1180px]">
         <Link href="/" className="font-semibold text-lg tracking-tight flex items-center gap-2.5 hover:opacity-80 transition-opacity">
           <div className="w-7 h-7 rounded-[8px] bg-black/20 dark:bg-white/10 shadow-inner flex items-center justify-center text-white border border-black/10 dark:border-white/10 relative overflow-hidden">

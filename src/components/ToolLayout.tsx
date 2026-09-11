@@ -22,13 +22,12 @@ export function ToolLayout({
 }: ToolLayoutProps) {
   return (
     <div className="flex flex-col items-center pb-24 w-full">
-      {/* Breadcrumb */}
-      <nav className="w-full max-w-[800px] mb-6 mt-4 flex items-center gap-2 text-sm text-[var(--foreground-muted)]">
-        <Link href="/" className="hover:text-[var(--foreground)] transition-colors">Tools</Link>
-        <span className="opacity-50">/</span>
-        <Link href={categoryHref} className="hover:text-[var(--foreground)] transition-colors">{category}</Link>
-        <span className="opacity-50">/</span>
-        <span className="text-[var(--foreground)] font-medium">{title}</span>
+      {/* Back Button */}
+      <nav className="w-full max-w-[800px] mb-6 mt-2 flex items-center">
+        <Link href={categoryHref} className="flex items-center gap-1.5 text-primary-500 hover:opacity-80 transition-opacity font-medium text-[17px]">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          Back
+        </Link>
       </nav>
 
       {/* Header */}

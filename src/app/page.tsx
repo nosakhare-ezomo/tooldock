@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { SearchableToolGrid } from "@/components/SearchableToolGrid";
 
 const popularTools = [
   { name: "Merge PDF", desc: "Combine multiple PDFs into one", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>, href: "/pdf/merge" },
@@ -34,49 +35,12 @@ export default function Home() {
           <span className="text-[var(--foreground-muted)]">No nonsense.</span>
         </h1>
         
-        <p className="text-lg text-[var(--foreground-secondary)] max-w-[600px] text-balance mb-12 leading-relaxed">
+        <p className="text-lg text-[var(--foreground-secondary)] max-w-[600px] text-balance mb-6 leading-relaxed">
           Fast, private utilities for PDFs, images, text, calculations and everyday tasks.
         </p>
-
-        {/* Search Field */}
-        <div className="w-full max-w-[600px] relative group">
-          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-[var(--foreground-muted)] group-focus-within:text-primary-500 transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-          <input 
-            type="text" 
-            placeholder="Search tools" 
-            className="w-full pl-14 pr-16 py-4 text-[17px] rounded-[18px] liquid-glass placeholder:text-[var(--foreground-muted)] focus:outline-none focus:ring-1 focus:ring-primary-500/50 transition-all text-[var(--foreground)]"
-          />
-          <div className="absolute inset-y-0 right-3 flex items-center">
-             <div className="px-2 py-1 rounded-[6px] bg-[var(--card-bg)] border border-[var(--card-border)] text-[11px] font-medium text-[var(--foreground-muted)]">⌘ K</div>
-          </div>
-        </div>
       </section>
 
-      {/* Popular Tools Grid */}
-      <section className="w-full mt-10">
-        <h2 className="text-[22px] font-[650] mb-6 flex items-center gap-3 tracking-[-0.02em]">
-          Popular Tools
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {popularTools.map((tool) => (
-            <Link 
-              key={tool.name} 
-              href={tool.href}
-              className="liquid-glass-card p-5 flex flex-col items-start gap-4 group"
-            >
-              <div className="w-10 h-10 rounded-[10px] bg-[var(--background)] border border-[var(--glass-border)] flex items-center justify-center text-[var(--foreground-secondary)] group-hover:text-primary-500 transition-colors">
-                {tool.icon}
-              </div>
-              <div>
-                <h3 className="font-semibold text-[15px]">{tool.name}</h3>
-                <p className="text-[13px] text-[var(--foreground-muted)] mt-1 leading-snug">{tool.desc}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <SearchableToolGrid tools={popularTools} />
 
       {/* Local Processing Promise */}
       <section className="w-full mt-32 text-center flex flex-col items-center">
